@@ -1,6 +1,6 @@
-# ba-interface
+# frontend
 
-> web interface for ba
+> web interface for technology decision tool
 
 ## Build Setup
 

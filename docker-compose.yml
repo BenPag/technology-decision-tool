@@ -1,0 +1,69 @@
+version: "3.2"
+services:
+
+  #PHP Service
+  technology_decision_tool_php:
+    restart: 'always'
+    build: './backend/.docker/php/'
+    networks:
+      - technology_decision_tool-network
+    volumes:
+      - ./backend/:/var/www/html/
+
+  #Composer Service
+  technology_decision_tool_composer:
+    restart: 'no'
+    image: prooph/composer:7.3-zts
+    command: install
+    volumes:
+      - ./backend/:/var/www/html/
+    working_dir: /var/www/html/
+
+  #Apache Service
+  technology_decision_tool_apache:
+    restart: 'always'
+    build: './backend/.docker/apache/'
+    container_name: backendwebserver
+    depends_on:
+      - technology_decision_tool_php
+      - technology_decision_tool_mysql
+    networks:
+      - technology_decision_tool-network
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend/:/var/www/html/
+
+  #MySQL Service
+  technology_decision_tool_mysql:
+    image: mysql/mysql-server:5.7
+    container_name: technology_decision_tool_db
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: technology_decision_tool
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    networks:
+      - technology_decision_tool-network
+
+  #Frontend Service
+  technology_decision_tool_ui:
+    restart: 'always'
+    build:
+      context: ./frontend
+      dockerfile: .docker/Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      NODE_ENV: debug
+      API_URL: backendwebserver:8000
+    networks:
+      - technology_decision_tool-network
+
+#Docker Networks
+networks:
+  technology_decision_tool-network:
+    driver: bridge

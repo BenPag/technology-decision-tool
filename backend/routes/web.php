@@ -11,8 +11,17 @@
 |
 */
 
+use Illuminate\Support\Facades\Artisan;
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    if (file_exists(app_path() . '/initialized.file')) {
+        return $router->app->version();
+    }
+
+    Artisan::call('migrate');
+    Artisan::call('db:seed');
+    touch(app_path() . '/initialized.file');
+    return 'successfully initialized!';
 });
 
 $router->post('auth/login', 'AuthController@login');

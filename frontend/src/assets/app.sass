@@ -1,0 +1,191 @@
+$pico: #085299
+$picoLight: #59bdfa
+$custom-file-text: (placeholder: (en: "Choose file...", de: "Datei auswählen", es: "Seleccionar archivo..."), button-label: (en: "Browse", de: "Durchsuchen", es: "Navegar"))
+
+a
+  color: $pico
+  &:hover
+    color: $picoLight
+
+body
+  font-family: 'Raleway', sans-serif
+  word-wrap: break-word
+
+.bg-pico
+  background-color: $pico !important
+
+.btn-tails
+  margin: .5rem
+  a
+    text-decoration: none
+  .btn
+    width: 200px
+    height: 140px
+
+.btn-pico,
+.list-group-item.btn-pico
+  color: #fff
+  background-color: $picoLight
+  border-color: $picoLight
+  &:hover
+    color: #fff
+    background-color: $pico
+    border-color: $pico
+
+.btn-pico-inverse,
+.list-group-item.btn-pico-inverse
+  color: #fff
+  background-color: $pico
+  border-color: $pico
+  &:hover
+    color: #fff
+    background-color: $picoLight
+    border-color: $picoLight
+
+.navbar
+  font-size: 1.1rem
+
+  .navbar-brand
+    color: #292b2c
+    font-size: 1.5rem
+
+.table .thead-inverse th
+  font-weight: 300
+
+.navbar-light .navbar-nav .nav-link
+  color: #292b2c
+
+.center-y
+  position: relative
+  top: 50%
+  transform: translateY(-50%)
+
+.center-x
+  position: relative
+  left: 50%
+  transform: translateX(-50%)
+
+.center-table
+  display: table !important
+  margin-left: auto !important
+  margin-right: auto !important
+  width: auto !important
+  min-width: 50%
+[type="checkbox"]
+  vertical-align: middle
+
+.dropdown-menu
+  min-width: 100px !important
+
+.dropdown-item
+  padding: 3px 15px !important
+
+.user-menu
+  right: -1.5rem
+  left: auto !important
+
+.text-black
+  color: #444
+
+.fa-btn
+  margin-right: 6px
+
+h1
+  font-size: 2.25rem
+  margin: 0 !important
+
+.input-title
+    font-size: 24px
+    font-weight: bold
+
+input[type=checkbox]
+  min-width: 20px
+  min-height: 20px
+
+.header
+  padding: 3px 0
+
+.tooltip
+  width: auto !important
+  height: 250px !important
+
+.w-auto
+  width: auto
+
+.inline
+  display: inline !important
+
+.uploadField
+  border: dashed 3px rgba(80,80,80,0.8)
+  height: 400px
+  text-align: center
+  width: 100%
+
+  .text
+    font-size: 28px
+    display: inline-block
+    vertical-align: middle
+    line-height: normal
+
+  progress
+    display: none
+    z-index: 1000
+
+.custom-file
+  width: 100%
+
+.custom-file-label
+  @each $lang, $text in map-get($custom-file-text, button-label)
+    &:lang(#{$lang})::before
+      content: $text
+  @each $lang, $text in map-get($custom-file-text, placeholder)
+    &:lang(#{$lang}):empty::after
+      content: $text
+
+.cursor-pointer
+  cursor: pointer
+
+.form-flex
+  flex-basis: 30%
+  flex-flow: row nowrap
+  flex-shrink: 1
+
+.submit-logout
+  border: none
+  background: transparent
+  padding: 0
+  &:hover
+    color: $pico
+
+.dropdown-item
+  &:hover
+    color: $pico
+
+ul.nav .nav-item
+  a.nav-link
+    &:hover
+      color: $pico
+
+.media-thumbnail
+  max-height: 250px
+  max-width: 250px
+
+.form-check-input
+  position: relative
+  margin-left: 0
+  margin-top: -.25rem
+
+.bg-success-light
+  background-color: #c3e6cb
+
+.ck.ck-content.ck-editor__editable
+  min-height: 200px
+
+#message
+  color: #DDD
+  font-size: 25px
+  margin-bottom: 20px
+
+#timer
+  font-size: 45px
+  line-height: 1
